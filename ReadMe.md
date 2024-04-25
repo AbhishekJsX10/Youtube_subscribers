@@ -86,7 +86,7 @@ This project serves as the backend for a YouTube-like platform, providing APIs f
 
 ## Contributors
 
-- [Anurag Affection](https://github.com/AbhishekJsX10)
+- [Abhishek Chaturvedi](https://github.com/AbhishekJsX10)
 - You are welcome to contribute here!
 
 ## License
