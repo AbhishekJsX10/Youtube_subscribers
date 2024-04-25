@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Variables */
+:root {
+    --primary: coral;
+    --lighter-primary: rgba(255, 126, 79, 0.5);
+    --secondary: #3d3d3d;
+    --text: #222;
+    --alt-text: white;
+    --sidebar: #eee;
+    --code: dodgerblue;
+  }
+  
+  /* Global styles */
+  * {
+    box-sizing: border-box;
+  }
+  
+  html,
+  body {
+    background-color: #fefefe;
+    color: var(--text);
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    box-sizing: border-box;
+  }
+  
+  #top-bar {
+    height: 50px;
+    background: var(--primary);
+    width: 100%;
+  }
+  
+  #top-bar h1 {
+    padding: 10px 20px;
+    color: var(--alt-text);
+    margin: 0;
+    font-weight: 400;
+    font-size: 1.5rem;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: row;
+    height: calc(100% - 50px);
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+  }
+  
+  nav {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 300px;
+    padding: 20px;
+    background: var(--sidebar);
+    box-sizing: border-box;
+    transition: 0.3s;
+  }
+  
+  nav a {
+    color: var(--text);
+    text-decoration: none;
+    padding-left: 10px;
+    margin-left: 10px;
+    font-size: 1rem;
+    line-height: 2rem;
+    transition: 0.2s;
+  }
+  
+  nav a:hover {
+    background-color: var(--lighter-primary);
+    cursor: pointer;
+  }
+  
+  nav a.focus {
+    background-color: var(--primary);
+    color: var(--alt-text);
+  }
+  
+  header > a {
+    font-weight: bold;
+    font-size: 1.25rem;
+    line-height: 2.5rem;
+    padding: 10px;
+    margin: 0;
+  }
+  
+  header > a:hover {
+    background-color: var(--secondary);
+    color: var(--primary);
+  }
+  
+  main {
+    height: 100%;
+    padding: 0;
+    overflow-y: auto;
+    box-sizing: border-box;
+    flex: 1;
+    scroll-behavior: smooth;
+  }
+  
+  main section {
+    padding: 20px 40px;
+    width: 100%;
+  }
+  
+  main section:not(:first-of-type) {
+    max-width: 80ch;
+    margin: 20px 0;
+  }
+  
+  main section:first-of-type {
+    background: var(--secondary);
+    max-width: 100%;
+    padding: 25px 40px 50px;
+  }
+  
+  main section:first-of-type p {
+    font-size: 1.2rem;
+    line-height: 1.75rem;
+    color: var(--alt-text);
+    max-width: 65ch;
+  }
+  
+  main section:last-of-type {
+    border-top: 1px solid var(--primary);
+    margin-bottom: 0;
+  }
+  
+  main section:last-of-type a {
+    color: var(--primary);
+  }
+  
+  main section header.big {
+    margin: 0;
+    padding-bottom: 0.5rem;
+    font-size: 2.5rem;
+    color: var(--primary);
+    font-weight: 600;
+  }
+  
+  main section header.big::after {
+    content: '.';
+  }
+  
+  main section header {
+    font-size: 2rem;
+    line-height: 2.5rem;
+    color: var(--text);
+    font-weight: 600;
+  }
+  
+  main section h3 {
+    font-size: 1.25rem;
+  }
+  
+  main section h3::before {
+    content: '// ';
+    color: var(--primary);
+  }
+  
+  main section p {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    max-width: 80ch;
+  }
+  
+  main section p span {
+    font-weight: bold;
+    color: var(--primary);
+  }
+  
+  main section p code,
+  main section p pre {
+    background: #eee;
+    color: var(--code);
+    font-weight: 400;
+    font-family: monospace;
+    padding: 2px 5px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+  }
+  
+  main section pre {
+    background: #eee;
+    color: var(--code);
+    font-family: monospace;
+    padding: 10px 20px;
+    line-height: 1.75rem;
+    border: 1px solid lightgray;
+    width:auto
+  }
+  
+  main section li {
+    padding-left: 20px;
+    border-left: 5px solid var(--lighter-primary);
+    list-style: none;
+    line-height: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  main section p ~ h2 {
+    padding-top: 2rem;
+  }
+  
+  /* Media Queries */
+  @media screen and (max-width: 920px) {
+    main section pre {
+      font-size: 0.9rem;
+      line-height: 1.5rem;
+    }
+  }
+  @media screen and (max-width: 870px) {
+    main section pre {
+      font-size: 0.7rem;
+      line-height: 1.2rem;
+    }
+  }
+  @media screen and (max-width: 765px) {
+    main section pre {
+      font-size: 0.64rem;
+      line-height: 1rem;
+    }
+  }
+  @media screen and (max-width: 700px) {
+    nav {
+      margin-left: -300px;
+    }
+    main section pre {
+      font-size: 1rem;
+      line-height: 1.75rem;
+    }
+  }
+  @media screen and (max-width: 635px) {
+    main section pre {
+      font-size: 0.85rem;
+      line-height: 1.5rem;
+    }
+  }
+  @media screen and (max-width: 550px) {
+    main section pre {
+      font-size: 0.75rem;
+      line-height: 1.25rem;
+    }
+  }
+  @media screen and (max-width: 505px) {
+    main section pre {
+      font-size: 0.55rem;
+      line-height: 1rem;
+    }
+  }
+  @media screen and (max-width: 400px) {
+    main section pre {
+      font-size: 0.45rem;
+      line-height: 1rem;
+    }
+  }
+  @media screen and (max-width: 345px) {
+    main section pre {
+      font-size: 0.35rem;
+      line-height: 0.8rem;
+    }
+  }
+    </style>
+</head>
+<body>
+    <div id="top-bar">
+        <h1>&lt;/&gt; Docs.js</h1>
+    </div>
+    <div class="container">
+        <nav id="navbar">
+            <header>
+                <a href="#Youtube_Project"> YouTube Project </a>
+            </header>
+            <a class="nav-link" href="#What_you_should_already_know">
+                What you should already know
+            </a>
+            <a class="nav-link" href="#All_Channels">
+                All Channels
+            </a>
+            <a class="nav-link" href="#Add_Channel"> Add Channel </a>
+            <a class="nav-link" href="#All_Channels_names"> All Channel Names </a>
+            <a class="nav-link" href="#Subscribe_Channel">Subscribe a Channel</a>
+            <a class="nav-link" href="#Get_Subscribers">Get Subscribers of a Channel</a>
+            <a class="nav-link" href="#Check_Subscriptions">Check Subscriptions</a>
+            <a class="nav-link" href="#Delete_Channel">Delete Channel</a>
+            <a class="nav-link" href="#Edit_Channel">Edit Channel</a>
+        </nav>
+        <main id="main-doc">
+            <section id="Youtube_Project">
+                <header class="big">YouTube Project</header>
+                <p>
+                    <!-- <strong>JavaScript (JS)</strong> -->
+                    
+                    This code sets up a Node.js application using the Express framework for handling HTTP requests. It establishes routes to interact with a MongoDB database using Mongoose for object modeling. The application serves an API to manage channels and subscribers.
+                    
+                    The app.js file sets up the Express application, including middleware for parsing JSON and URL-encoded bodies, setting the view engine to EJS for rendering dynamic content, and defining routes.
+                    
+                    The application connects to a MongoDB database hosted on MongoDB Atlas, specifying the connection URL.
+                </p>
+            </section>
+            <section class="main-section" id="What_you_should_already_know">
+                <header>What you should already know</header>
+                    <br>
+                    This Node.js application utilizes the Express framework to create a web server for handling HTTP requests. The application interacts with a MongoDB database using Mongoose for object modeling, providing a seamless integration between the Node.js application and the database.
+                    <br>
+                    <br>
+                    Key components of the code include:
+                    <br>
+                    <br>
+                    <strong>Express Setup:</strong> The express module is imported, and an Express application instance is created (app). Middleware functions for parsing JSON and URL-encoded data are applied to the Express application.<br>
+                    <strong>View Engine Setup:</strong> The application is configured to use EJS (Embedded JavaScript) as the view engine, allowing for dynamic rendering of HTML pages with embedded JavaScript logic.<br>
+                    <strong>Routes Setup:</strong> Routes are defined to handle various API endpoints related to channel and subscriber management.<br> 
+                    <strong>Database Connection:</strong> The application establishes a connection to a MongoDB database using the Mongoose library. It specifies the connection URL, including credentials if necessary, and listens for events such as errors or successful connections to the database.<br>
+                    <strong>Server Initialization:</strong> The application listens on a specified port (in this case, port 3000) for incoming HTTP requests. Once the server is started, it begins listening for incoming requests and responds accordingly.<br>
+                    <strong>Route Handling:</strong> Within the app.js file, various routes are defined to handle different API endpoints related to channel and subscriber management. These routes define the logic for handling incoming requests, querying the database as needed, and sending appropriate responses back to clients.<br>
+                    <strong>Error Handling:</strong> Error handling middleware may be included to catch and handle errors that occur during request processing. This ensures that the application remains robust and can gracefully handle unexpected errors.<br>
+                    <strong>Modularization:</strong> The code demonstrates modularization by separating concerns into different files. Routes are defined in one file (app.js), while the main application logic resides in another file (the main application file).<br>
+                </p>
+              </section>
+              <section class="main-section" id="All_Channels">
+                <header onclick="allChannel()">GET /allchannels</header>
+                <p>
+                  The JavaScript documentation on MDN includes the following: Learning the
+                  Web provides information for beginners and introduces basic concepts of
+                  programming and the Internet. JavaScript Guide (this guide) provides an
+                  overview about the JavaScript language and its objects. JavaScript
+                  Reference provides detailed reference material for JavaScript. If you
+                  are new to JavaScript, start with the articles in the learning area and
+                  the JavaScript Guide. Once you have a firm grasp of the fundamentals,
+                  you can use the JavaScript Reference to get more details on individual
+                  objects and statements.
+                </p>
+                <pre>
+  <strong>Output:-</strong>
+{
+    "data": [
+      {
+        "_id": "662a30384a0871783fb087a5",
+        "channelName": "anurag",
+        "subscribers": [],
+        "subscriptions": [],
+        "addedAt": "2024-04-25T10:28:08.776Z",
+        "__v": 0
+      },
+      {
+        "_id": "662a30604a0871783fb087a8",
+        "channelName": "abhishekTony369",
+        "subscribers": [],
+        "subscriptions": [],
+        "addedAt": "2024-04-25T10:28:48.757Z",
+        "__v": 0
+      },
+      {
+        "_id": "662a30c3ed13f6c55c6361b9",
+        "channelName": "ShekharVlogs",
+        "subscribers": [
+          {
+            "subscriber": "662a30f1ed13f6c55c6361bc",
+            "subscribedAt": "2024-04-25T10:35:30.641Z",
+            "_id": "662a31f2c7f47f87f257d117"
+          }
+      ],
+      "subscriptions": [],
+      "addedAt": "2024-04-25T10:30:27.228Z",
+      "__v": 1
+  },
+  {
+    "_id": "662a30f1ed13f6c55c6361bc",
+    "channelName": "Shanu's kitchen",
+    "subscribers": [],
+    "subscriptions": [
+      {
+        "channel": "662a30c3ed13f6c55c6361b9",
+        "subscribedAt": "2024-04-25T10:35:30.434Z",
+        "_id": "662a31f2c7f47f87f257d115"
+      }
+    ],
+    "addedAt": "2024-04-25T10:31:13.952Z",
+    "__v": 1
+    }
+  ]
+}
+                </pre>
+              </section>
+              <section class="main-section" id="Add_Channel">
+                <header>POST /addChannel</header>
+                <p>
+                    The POST /addChannel endpoint is a route in the application designed to handle HTTP POST requests for adding a new channel to the database. When a client sends a POST request to this endpoint, it includes data representing the new channel to be added, specifically the channelName.
+                </p>
+                <p>
+                    Upon receiving the POST request, the server extracts the channelName from the request body. This data is typically sent in JSON format and is parsed by Express middleware (express.json()).
+                </p>
+                <p>
+                    Next, the application interacts with the MongoDB database using Mongoose, a MongoDB object modeling tool for Node.js. It creates a new document in the database to represent the new channel, setting the channelName field of the document to the value provided in the request body.
+                </p>
+                <p>
+                    The endpoint includes error-handling logic to manage any errors that may occur during the database interaction process. If an error occurs, the server sends an appropriate error response back to the client with details of the error.
+                </p>
+                <p>
+                    Upon successful addition of the channel to the database, the server sends a response back to the client with a status code of 200 (OK) and a JSON object containing a success message and details of the newly created channel. This response informs the client that the operation was successful and provides relevant information about the newly added channel.
+                </p>
+                <p>
+                    Overall, the POST /addChannel endpoint provides a straightforward way for clients to add new channels to the database, enabling the application to dynamically manage its channel database.
+                </p>
+                <pre>
+<strong>Input:-</strong>
+  {
+    "channelName":"Charlie's Live"
+  }
+                </pre>
+                <pre>
+<strong>Output:-</strong>
+  {
+    "message": "Channel created successfully",
+    "createdChannelDetails": {
+    "_id": "662a737cda84261b187070a8",
+    "channelName": "Charlie's Live",
+    "subscribers": [],
+    "subscriptions": [],
+    "addedAt": "2024-04-25T15:15:08.463Z",
+    "__v": 0
+    }
+  }
+                </pre>
+              </section>
+              <section class="main-section" id="All_Channels_names">
+                <header onclick="ChannelNames()">GET /channelnames</header>
+                <p>
+                    The GET /channelnames endpoint serves as a crucial component in the application's functionality, enabling clients to retrieve a comprehensive list of all channel names stored within the database. When a client sends a GET request to this endpoint, the Express server initiates the corresponding route handler function. Within this function, the application seamlessly interacts with the MongoDB database through Mongoose, executing a query to fetch all channel documents.
+                </p>
+                <p>
+                   Subsequently, the application extracts the channel names from each document and constructs an array containing these names. This array serves as the response payload, encapsulating the retrieved channel names. Upon completion of the database query and data extraction process, the server sends a response back to the client, conveying the array of channel names within the response body. Additionally, the code includes robust error handling mechanisms to gracefully manage any potential errors that may arise during the database query execution.
+                </p>
+                <p>
+                    In summary, the GET /channelnames endpoint provides a straightforward and efficient means for clients to access and utilize the complete list of channel names stored in the database, facilitating seamless integration and utilization within the application's user interface or other components.
+                </p>
+                <pre>
+<strong>Output:-</strong>
+  [
+    "anurag",
+    "abhishekTony369",
+    "ShekharVlogs",
+    "Shanu's kitchen",
+    "Charlie's Live"
+  ]
+                </pre>
+              </section>
+              <section class="main-section" id="Subscribe_Channel">
+                <header>POST /subscribe/:channelId</header>
+                <p>
+                    The POST /subscribe/:channelId endpoint is a pivotal part of the application's functionality, enabling the subscription of one channel to another specified by targetChannelId. When a client sends a POST request to this endpoint, the server triggers the corresponding route handler function. Within this function, the application begins by extracting the targetChannelId from the request parameters, alongside additional subscription details as necessary. Subsequently, the application utilizes Mongoose, the MongoDB object modeling tool, to interact with the database. It queries for the channel corresponding to the channelId and the target channel specified by targetChannelId. 
+                </p>
+                <p>
+                    Following retrieval, the application orchestrates the subscription process, wherein the specified channel is subscribed to the target channel, and vice versa. This involves updating the respective subscription lists within the database documents for both channels, along with relevant subscription metadata such as the subscription date/time. Upon successful completion of the subscription process, the server sends a response back to the client, typically with a status code of 200 (OK) and a success message confirming the subscription. Conversely, in the event of errors during database interaction or subscription processing, the code includes error handling mechanisms to gracefully manage and communicate any encountered issues. 
+                </p>
+                <p>
+                  The ECMAScript document is not intended to help script programmers; use
+                  the JavaScript documentation for information on writing scripts.
+                </p>
+                <p>
+                    In essence, the POST /subscribe/:channelId endpoint provides a seamless mechanism for clients to establish subscriptions between channels, fostering interconnectedness and engagement within the application's ecosystem.
+                </p>
+                <pre>
+<strong>Input:-</strong>
+  http://localhost:3000/subscribe/662a30f1ed13f6c55c6361bc
+  {
+    "targetChannelId":"662a30c3ed13f6c55c6361b9"
+  }
+                </pre>
+                <pre>
+<strong>Output:-</strong>
+  {
+    "message": "Subscribed successfully"
+  }
+                </pre>
+              </section>
+              <section class="main-section" id="Get_Subscribers">
+                <header>GET /subscribers/:channelId</header>
+                <p>
+                    The GET /subscribers/:channelId endpoint serves as a pivotal feature within the application, enabling clients to retrieve the list of subscribers associated with a specific channel identified by channelId. When a client issues a GET request to this endpoint, the Express server triggers the corresponding route handler function. Within this function, the application commences by extracting the channelId from the request parameters, allowing it to pinpoint the specific channel of interest. Subsequently, utilizing Mongoose, the application interacts with the MongoDB database to retrieve the document representing the targeted channel. Once retrieved, the application fetches the list of subscribers associated with the channel from the database.
+                </p>
+                <p>
+                    Following the retrieval of subscriber data, the application constructs a response payload containing this information. This payload typically takes the form of a JSON object or array, encapsulating details such as subscriber names, IDs, or other relevant metadata. Subsequently, the server sends this response back to the client, thereby providing them with access to the list of subscribers for the specified channel.
+                </p>
+                <p>
+                    Furthermore, to ensure robustness and reliability, the code incorporates error handling mechanisms to gracefully manage any potential errors encountered during the database query or retrieval process. In the event of errors, the server communicates an appropriate error response back to the client, providing details regarding the encountered issue.
+                </p>
+                <p>
+                    Overall, the GET /subscribers/:channelId endpoint represents a fundamental aspect of the application's functionality, empowering clients to access and utilize subscriber data associated with specific channels. This capability fosters engagement and interaction within the application's ecosystem, facilitating informed decision-making and personalized experiences for both content creators and subscribers alike.
+                </p>
+                <pre>
+<strong>Input:-</strong>
+http://localhost:3000/subscribers/662a30c3ed13f6c55c6361b9
+                </pre>      
+                <pre>
+<strong>Output:-</strong>
+  {
+    "message": "Subscribed successfully"
+  }
+                </pre>
+              </section>
+            <section class="main-section" id="Check_Subscriptions">
+                <header>Check Subscriptions</header>
+                <p>
+                <!-- Subscription content -->
+                <header>GET /subscriptions/:channelId</header>
+            <p>
+                The GET /subscriptions/:channelId endpoint plays a crucial role within the application, facilitating the retrieval of a list of channels to which the channel specified by channelId is subscribed. When a client initiates a GET request to this endpoint, the corresponding route handler function in the Express server is triggered. Within this function, the application begins by extracting the channelId parameter from the request, enabling it to identify the specific channel in question.
+            </p>
+            <p>
+                Subsequently, leveraging the capabilities of Mongoose, the application interacts with the MongoDB database to retrieve the document representing the targeted channel. Once retrieved, the application accesses the subscription list associated with the channel from the database. This subscription list contains references to the channels to which the specified channel is subscribed.
+            </p>
+            <p>
+                Following the retrieval of subscription data, the application constructs a response payload containing this information. Typically formatted as a JSON object or array, this payload encapsulates details such as the names or IDs of the subscribed channels, along with any relevant metadata.
+            </p>
+            <p>
+                Upon assembling the response payload, the server sends it back to the client, thereby providing them with access to the list of channels to which the specified channel is subscribed. This enables clients to gain insights into the channel's subscription behavior and fosters further interaction and engagement within the application's ecosystem.
+            </p>
+            <p>
+                Additionally, to ensure robustness and reliability, the code incorporates error handling mechanisms to gracefully manage any potential errors encountered during the database query or retrieval process. In the event of errors, the server communicates an appropriate error response back to the client, offering details regarding the encountered issue.
+            </p>
+            <p>
+                In summary, the GET /subscriptions/:channelId endpoint serves as a foundational element of the application's functionality, empowering clients to explore and understand the subscription relationships associated with specific channels. This capability facilitates informed decision-making and personalized experiences for users within the application, contributing to a dynamic and engaging user experience.
+            </p>
+            </p>
+            <pre>
+<strong>Input:-</strong>
+http://localhost:3000/subscriptions/662a30f1ed13f6c55c6361bc
+            </pre>
+            <pre>
+<strong>Output:-</strong>
+  [
+    {
+      "channel": "662a30c3ed13f6c55c6361b9",
+      "subscribedAt": "2024-04-25T10:35:30.434Z",
+      "_id": "662a31f2c7f47f87f257d115"
+    }
+  ]
+            </pre>
+            </section>
+            <section class="main-section" id="Delete_Channel">
+                <header>Delete Channel</header>
+                <p>
+                    <!-- Deletion content -->
+                    <header>DELETE /delete/:channelId</header>
+            <p>
+                The DELETE /delete/:channelId endpoint is a critical component of the application, providing functionality to delete the channel specified by the unique identifier channelId. When a client sends a DELETE request to this endpoint, the Express server triggers the corresponding route handler function. Within this function, the application extracts the channelId parameter from the request, enabling precise identification of the channel to be deleted.
+            </p>
+            <p>
+                Subsequently, leveraging Mongoose, the application interacts with the MongoDB database to locate and remove the document representing the targeted channel. Once located, the application proceeds to delete the channel document from the database.
+            </p>
+            <p>
+                Upon successful deletion of the channel, the server sends a response back to the client, typically with a status code of 200 (OK) and a success message confirming the deletion. This response informs the client that the operation was successful and that the specified channel has been removed from the database.
+            </p>
+            <p>
+                Additionally, the code incorporates robust error handling mechanisms to manage any potential errors encountered during the deletion process. If an error occurs, the server communicates an appropriate error response back to the client, providing details regarding the encountered issue.
+            </p>
+            <p>
+                In summary, the DELETE /delete/:channelId endpoint offers clients a straightforward method to permanently remove channels from the application's database. This capability empowers users to manage their channel portfolio effectively, facilitating maintenance and organization within the application's ecosystem.
+            </p>
+                </p>
+              <pre>
+<strong>Input:-</strong>
+http://localhost:3000/delete/662a2fe74a0871783fb087a2 
+              </pre>
+              <pre>
+<strong>Output:-</strong>
+  {
+    "_id": "662a30604a0871783fb087a8",
+    "channelName": "abhishekTony369",
+    "subscribers": [],
+    "subscriptions": [],
+    "addedAt": "2024-04-25T10:28:48.757Z",
+    "__v": 0
+  }
+              </pre>
+            </section>
+            <section class="main-section" id="Edit_Channel">
+                <header>Edit Channel</header>
+                <p>
+                  
+                    <header>PUT /update/:channelId</header>
+            <p>
+                The PUT /update/:channelId endpoint is a vital feature of the application, allowing clients to modify the name of the channel identified by the unique identifier channelId. Upon receiving a PUT request to this endpoint, the Express server invokes the corresponding route handler function. Within this function, the application extracts the channelId parameter from the request, enabling precise identification of the channel to be updated.
+            </p>
+            <p>
+                Utilizing Mongoose, the application interacts with the MongoDB database to locate and retrieve the document representing the targeted channel. Once retrieved, the application updates the channelName field of the channel document with the new name provided in the request body.
+            </p>
+            <p>
+                Upon successful updating of the channel name, the server sends a response back to the client, typically with a status code of 200 (OK) and a JSON object containing details of the updated channel. This response confirms to the client that the operation was successful and provides them with relevant information about the updated channel.
+            </p>
+            <p>
+                To ensure robustness, the code incorporates error handling mechanisms to manage any potential errors encountered during the update process. If an error occurs, the server communicates an appropriate error response back to the client, providing details regarding the encountered issue.
+            </p>
+            <p>
+                In summary, the PUT /update/:channelId endpoint offers clients a straightforward means to modify the name of a specific channel within the application's database. This capability empowers users to manage their channel information effectively, facilitating customization and maintenance within the application's ecosystem.
+            </p>
+                </p>
+              <pre>
+<strong>Input:-</strong>
+http://localhost:3000/update/662a30384a0871783fb087a5
+  {
+    "channelName" : "anurag"
+  }
+              </pre>
+              <pre>
+  {
+    "_id": "662a30384a0871783fb087a5",
+    "channelName": "anurag",
+    "subscribers": [],
+    "subscriptions": [],
+    "addedAt": "2024-04-25T10:28:08.776Z",
+    "__v": 0
+  }
+              </pre>
+            </section>
+            <section>
+                <p>
+                  Documentation by
+                  <a
+                    href="#"
+                    >Abhishek Chaturvedi</a
+                  >.
+                </p>
+              </section>
+        </main>
+    </div>
+    <script>
+
+
+
+        var isThrottled = false;
+        var body;
+        var links = document.querySelectorAll('.nav-link');
+
+        document.addEventListener("DOMContentLoaded", function() {
+            body = document.querySelector('#main-doc');
+            body.addEventListener("scroll", scrollHandler, false);
+        });
+
+        function scrollHandler() {
+            if (!isThrottled) {
+                isThrottled = true;
+                checkScrollPosition();
+                setTimeout(function() {
+                    isThrottled = false;
+                }, 33);
+            }
+        }
+
+        function checkScrollPosition() {
+            var bodyTop = body.scrollTop;
+            links.forEach(function(link) {
+                var el = document.querySelector(link.hash);
+                if (el.getBoundingClientRect().top <= 150) {
+                    links.forEach(function(l) {
+                        if (l.hash === link.hash) {
+                            l.classList.add('focus');
+                        } else {
+                            l.classList.remove('focus');
+                        }
+                    });
+                } else {
+                    link.classList.remove('focus');
+                }
+            });
+        }
+
+        function allChannel(){
+          window.location.href = '/allchannels'
+        }
+        function ChannelNames(){
+          window.location.href = '/channelnames'
+        }
+    </script>
+</body>
+</html>

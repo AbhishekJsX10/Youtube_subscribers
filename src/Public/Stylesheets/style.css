@@ -1,0 +1,214 @@
+/* Variables */
+:root {
+    --primary: coral;
+    --lighter-primary: rgba(255, 126, 79, 0.5);
+    --secondary: #3d3d3d;
+    --text: #222;
+    --alt-text: white;
+    --sidebar: #eee;
+    --code: dodgerblue;
+  }
+  
+  /* Global styles */
+  * {
+    box-sizing: border-box;
+  }
+  
+  html,
+  body {
+    background-color: #fefefe;
+    color: var(--text);
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    box-sizing: border-box;
+  }
+  
+  #top-bar {
+    height: 50px;
+    background: var(--primary);
+    width: 100%;
+  }
+  
+  #top-bar h1 {
+    padding: 10px 20px;
+    color: var(--alt-text);
+    margin: 0;
+    font-weight: 400;
+    font-size: 1.5rem;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: row;
+    height: calc(100% - 50px);
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+  }
+  
+  nav {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 300px;
+    padding: 20px;
+    background: var(--sidebar);
+    box-sizing: border-box;
+    transition: 0.3s;
+  }
+  
+  nav a {
+    color: var(--text);
+    text-decoration: none;
+    padding-left: 10px;
+    margin-left: 10px;
+    font-size: 1rem;
+    line-height: 2rem;
+    transition: 0.2s;
+  }
+  
+  nav a:hover {
+    background-color: var(--lighter-primary);
+    cursor: pointer;
+  }
+  
+  nav a.focus {
+    background-color: var(--primary);
+    color: var(--alt-text);
+  }
+  
+  header > a {
+    font-weight: bold;
+    font-size: 1.25rem;
+    line-height: 2.5rem;
+    padding: 10px;
+    margin: 0;
+  }
+  
+  header > a:hover {
+    background-color: var(--secondary);
+    color: var(--primary);
+  }
+  
+  main {
+    height: 100%;
+    padding: 0;
+    overflow-y: auto;
+    box-sizing: border-box;
+    flex: 1;
+    scroll-behavior: smooth;
+  }
+  
+  main section {
+    padding: 20px 40px;
+    width: 100%;
+  }
+  
+  main section:not(:first-of-type) {
+    max-width: 80ch;
+    margin: 20px 0;
+  }
+  
+  main section:first-of-type {
+    background: var(--secondary);
+    max-width: 100%;
+    padding: 25px 40px 50px;
+  }
+  
+  main section:first-of-type p {
+    font-size: 1.2rem;
+    line-height: 1.75rem;
+    color: var(--alt-text);
+    max-width: 65ch;
+  }
+  
+  main section:last-of-type {
+    border-top: 1px solid var(--primary);
+    margin-bottom: 0;
+  }
+  
+  main section:last-of-type a {
+    color: var(--primary);
+  }
+  
+  main section header.big {
+    margin: 0;
+    padding-bottom: 0.5rem;
+    font-size: 2.5rem;
+    color: var(--primary);
+    font-weight: 600;
+  }
+  
+  main section header.big::after {
+    content: '.';
+  }
+  
+  main section header {
+    font-size: 2rem;
+    line-height: 2.5rem;
+    color: var(--text);
+    font-weight: 600;
+  }
+  
+  main section h3 {
+    font-size: 1.25rem;
+  }
+  
+  main section h3::before {
+    content: '// ';
+    color: var(--primary);
+  }
+  
+  main section p {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    max-width: 80ch;
+  }
+  
+  main section p span {
+    font-weight: bold;
+    color: var(--primary);
+  }
+  
+  main section p code,
+  main section p pre {
+    background: #eee;
+    color: var(--code);
+    font-weight: 400;
+    font-family: monospace;
+    padding: 2px 5px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+  }
+  
+  main section pre {
+    background: #eee;
+    color: var(--code);
+    font-family: monospace;
+    padding: 10px 20px;
+    line-height: 1.75rem;
+    border: 1px solid lightgray;
+  }
+  
+  main section li {
+    padding-left: 20px;
+    border-left: 5px solid var(--lighter-primary);
+    list-style: none;
+    line-height: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  main section p ~ h2 {
+    padding-top: 2rem;
+  }
+  
+  /* Media Queries */
+  @media screen and (max-width: 700px) {
+    nav {
+      margin-left: -300px;
+    }
+  }
+  
